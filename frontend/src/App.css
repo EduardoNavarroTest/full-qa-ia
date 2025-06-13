@@ -1,0 +1,10 @@
+/* global.css */
+body {
+  background-color: #f4f4f4;
+  /* Color de fondo común */
+  margin: 0;
+  padding: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  
+}
