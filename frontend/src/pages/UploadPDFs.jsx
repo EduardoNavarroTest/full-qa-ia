@@ -9,6 +9,8 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { uploadFile, getUploadedFiles, deleteFile } from '../services/pdfService';
+const API_URL = `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}`;
+
 
 const UploadPDFs = () => {
   const [file, setFile] = useState(null);
@@ -136,7 +138,10 @@ const UploadPDFs = () => {
                       secondaryAction={
                         <IconButton
                           edge="end"
-                          onClick={() => handleDelete(filename)}
+                          onClick={(e) => {
+                            e.stopPropagation(); // evita que se dispare el evento del ListItem
+                            handleDelete(filename);
+                          }}
                           disabled={deleting === filename}
                         >
                           {deleting === filename ? (
@@ -147,11 +152,9 @@ const UploadPDFs = () => {
                         </IconButton>
                       }
                       button
-                      component="a"
-                      href={`http://localhost:3000/uploads/${filename}`}
-                      target="_blank"
-                      rel="noreferrer"
+                      onClick={() => window.open(`${API_URL}/uploads/${filename}`, '_blank')}
                     >
+
                       <ListItemIcon>
                         <PictureAsPdfIcon color="error" />
                       </ListItemIcon>
